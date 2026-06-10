@@ -37,14 +37,23 @@ function hasGenerateAccess(member, category) {
   if (isOwner(member.id)) return true;
 
   const roleId = getCategoryRoleId(category);
-  if (roleId) {
-    if (member.roles.cache.has(roleId)) return true;
-  } else {
-    const roleName = category === 'free+' ? 'free+' : category;
-    if (member.roles.cache.some(r => r.name.toLowerCase() === roleName.toLowerCase())) return true;
+  const roleName = category === 'free+' ? 'free+' : category;
+  const hasRole = roleId
+    ? member.roles.cache.has(roleId)
+    : member.roles.cache.some(r => r.name.toLowerCase() === roleName.toLowerCase());
+
+  if (category === 'free') {
+    // Free tier: role is sufficient; subscription alone does not grant access
+    return hasRole;
   }
 
-  return hasActiveSub(member.id, category);
+  if (category === 'premium') {
+    // Premium tier: BOTH the premium role AND an active subscription are required
+    return hasRole && hasActiveSub(member.id, category);
+  }
+
+  // free+ (and any future mid-tiers): role OR active subscription
+  return hasRole || hasActiveSub(member.id, category);
 }
 
 module.exports = { CATEGORIES, isOwner, ownerOnly, getCategoryRoleId, hasGenerateAccess, hasActiveSub };

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getUser, updateUser } = require('../database');
-const { ownerOnly, getCategoryRoleId } = require('../utils');
+const { ownerOnly, getCategoryRoleId, TIER_RANK } = require('../utils');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -49,7 +49,11 @@ module.exports = {
         premium: getCategoryRoleId('premium'),
       };
       for (const [t, rid] of Object.entries(tierRoles)) {
-        if (rid && t !== tier && member.roles.cache.has(rid)) {
+        if (!rid || !member.roles.cache.has(rid)) continue;
+        // Always keep the free role unless we're explicitly setting tier to 'none'
+        if (t === 'free' && tier !== 'none') continue;
+        // Only remove roles that are strictly higher than the new tier
+        if (t !== tier && (tier === 'none' || TIER_RANK[t] > TIER_RANK[tier])) {
           await member.roles.remove(rid).catch(() => {});
         }
       }
