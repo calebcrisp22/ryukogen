@@ -8,6 +8,16 @@ const CATEGORY_LABELS = { free: '🟢 Free', 'free+': '🔵 Free+', premium: '�
 const wait = (ms) => new Promise(res => setTimeout(res, ms));
 
 function parseAccount(raw) {
+  // Normalise to string — stock items may have been persisted as objects
+  // (e.g. { credentials: "...", ... }) rather than plain strings.
+  if (typeof raw !== 'string') {
+    if (raw && typeof raw === 'object') {
+      // Prefer known string-carrying keys, fall back to JSON
+      raw = raw.credentials ?? raw.account ?? raw.data ?? raw.value ?? raw.text ?? JSON.stringify(raw);
+    } else {
+      raw = String(raw ?? '');
+    }
+  }
   const parts = raw.split('|').map(p => p.trim()).filter(p => p.length > 0);
   const credentials = parts[0] || raw.trim();
   let skinLink = null;
