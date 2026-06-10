@@ -256,7 +256,7 @@ module.exports = {
       // Delivery failed after we popped the account — put it back & refund the cooldown
       restoreStock(category, raw);
       updateUser(interaction.user.id, { [`last_gen_${catKey}`]: lastGen, last_gen: user.last_gen || 0 });
-      await statusMsg.edit({ content: '⚠️ Couldn’t deliver your account (your DMs may have just closed). It was returned to stock — please run `/generate` again.' }).catch(() => {});
+      await statusMsg.edit({ content: '⚠️ Couldn\'t deliver your account (your DMs may have just closed). It was returned to stock — please run `/generate` again.' }).catch(() => {});
       const failEmbed = new EmbedBuilder()
         .setColor(0xFEE75C)
         .setTitle('⚠️ Delivery Failed')
