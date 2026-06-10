@@ -250,7 +250,7 @@ module.exports = {
     // Play the "processing" cascade in the DM, then deliver the account embed
     await wait(1300);
     await statusMsg.edit({ content: '⌛ **Adding account to API...** This may take 30-60 seconds...' }).catch(() => {});
-    await wait(1600);
+    await wait(10000);
     await statusMsg.edit({ content: '✅ **Account ready!** Here are your details below 👇' }).catch(() => {});
 
     let delivered = true;
