@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder, ActivityType } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const { registerCommands } = require('./deploy-commands');
 const {
   getDropConfig, setDropConfig, popDropStock, dropCategories, dropStockCount,
   addInviteJoin, saveInvite, incrementUserField,
@@ -36,6 +37,12 @@ let dropInterval = null;
 
 client.once('ready', async () => {
   console.log(`✅ Logged in as ${client.user.tag}`);
+
+  try {
+    await registerCommands();
+  } catch (err) {
+    console.error('❌ Failed to register commands:', err);
+  }
 
   applyPresence(client);
 
