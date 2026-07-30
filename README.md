@@ -1,10 +1,10 @@
-# Generator Bot
+# Fortnite Generator Bot
 
-A Discord account generator bot with stock management, auto-drops, subscriptions, invite tracking, and vouches.
+A Discord Fortnite account generator bot with stock management, auto-drops, subscriptions, invite tracking, and vouches.
 
 ## Features
 
-- 🎮 **Generate** accounts from stock via `/generate`
+- 🎮 **Generate** Fortnite accounts from stock via `/generate`
 - 📦 **Stock management** — upload `.txt` files to add accounts per category
 - 🎁 **Auto-drop system** — automatically drops accounts in a channel on a timer
 - 🪙 **Token system** — give users tokens

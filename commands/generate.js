@@ -2,8 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 const { getConfig, getUser, updateUser, popStock, restoreStock, stockCount, getBannerFile } = require('../database');
 const { hasGenerateAccess, isOwner } = require('../utils');
 
-const CATEGORY_COLORS = { free: 0x57F287, 'free+': 0x5865F2, premium: 0xFEE75C };
-const CATEGORY_LABELS = { free: '🟢 Free', 'free+': '🔵 Free+', premium: '⭐ Premium' };
+const CATEGORY_COLORS = { free: 0x00D4FF, premium: 0x8B3DFF };
+const CATEGORY_LABELS = { free: '🟢 Free', premium: '⭐ Premium' };
 
 const wait = (ms) => new Promise(res => setTimeout(res, ms));
 
@@ -31,7 +31,7 @@ function parseAccount(raw) {
       skinLink = part;
       continue;
     }
-    // Currency-style segment: "Credits: 119 / Renown: 5972" -> side-by-side fields
+    // Currency-style segment: "V-Bucks: 2500 / Level: 87" -> side-by-side fields
     if (part.includes(' / ')) {
       const subs = part.split(' / ').map(s => s.trim()).filter(Boolean);
       if (subs.length > 1 && subs.every(s => s.includes(':') || s.includes('➡'))) {
@@ -81,7 +81,6 @@ module.exports = {
         .setRequired(true)
         .addChoices(
           { name: '🟢 Free',    value: 'free' },
-          { name: '🔵 Free+',   value: 'free+' },
           { name: '⭐ Premium', value: 'premium' }
         )
     ),
@@ -202,7 +201,7 @@ module.exports = {
       .setFooter({ text: 'Generator • Do NOT share your credentials with anyone' })
       .setTimestamp();
 
-    // Currency shown as side-by-side columns (e.g. Credits | Renown)
+    // Currency shown as side-by-side columns (e.g. V-Bucks | Level)
     if (currencyFields.length > 0) dmEmbed.addFields(...currencyFields.slice(0, 3));
 
     dmEmbed.addFields({ name: '🔑 Login Credentials', value: `\`\`\`${credentials}\`\`\``, inline: false });

@@ -16,7 +16,6 @@ module.exports = {
         .addChoices(
           { name: 'None', value: 'none' },
           { name: 'Free', value: 'free' },
-          { name: 'Free+', value: 'free+' },
           { name: 'Premium', value: 'premium' }
         )
     )
@@ -45,7 +44,6 @@ module.exports = {
     if (member) {
       const tierRoles = {
         free:    getCategoryRoleId('free'),
-        'free+': getCategoryRoleId('free+'),
         premium: getCategoryRoleId('premium'),
       };
       for (const [t, rid] of Object.entries(tierRoles)) {
