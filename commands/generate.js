@@ -2,7 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 const { getConfig, getUser, updateUser, popStock, restoreStock, stockCount, getBannerFile } = require('../database');
 const { hasGenerateAccess, isOwner } = require('../utils');
 
-const CATEGORY_COLORS = { free: 0x00D4FF, premium: 0x8B3DFF };
+const CATEGORY_COLORS = { free: 0x57F287, premium: 0xFF6B00 };
 const CATEGORY_LABELS = { free: '🟢 Free', premium: '⭐ Premium' };
 
 const wait = (ms) => new Promise(res => setTimeout(res, ms));
