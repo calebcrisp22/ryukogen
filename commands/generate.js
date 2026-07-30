@@ -2,8 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 const { getConfig, getUser, updateUser, popStock, restoreStock, stockCount, getBannerFile } = require('../database');
 const { hasGenerateAccess, isOwner } = require('../utils');
 
-const CATEGORY_COLORS = { free: 0x57F287, 'free+': 0x5865F2, premium: 0xFEE75C };
-const CATEGORY_LABELS = { free: '🟢 Free', 'free+': '🔵 Free+', premium: '⭐ Premium' };
+const CATEGORY_COLORS = { free: 0x57F287, premium: 0xFF6B00 };
+const CATEGORY_LABELS = { free: '🟢 Free', premium: '⭐ Premium' };
 
 const wait = (ms) => new Promise(res => setTimeout(res, ms));
 
@@ -31,7 +31,7 @@ function parseAccount(raw) {
       skinLink = part;
       continue;
     }
-    // Currency-style segment: "Credits: 119 / Renown: 5972" -> side-by-side fields
+    // Currency-style segment: "V-Bucks: 1500 / Skins: 42" -> side-by-side fields
     if (part.includes(' / ')) {
       const subs = part.split(' / ').map(s => s.trim()).filter(Boolean);
       if (subs.length > 1 && subs.every(s => s.includes(':') || s.includes('➡'))) {
@@ -81,7 +81,6 @@ module.exports = {
         .setRequired(true)
         .addChoices(
           { name: '🟢 Free',    value: 'free' },
-          { name: '🔵 Free+',   value: 'free+' },
           { name: '⭐ Premium', value: 'premium' }
         )
     ),
@@ -104,7 +103,7 @@ module.exports = {
     }
 
     if (!hasGenerateAccess(interaction.member, category)) {
-      const roleId = getConfig(`role_${category.replace('+', 'plus')}`);
+      const roleId = getConfig(`role_${category}`);
       const roleRef = roleId ? `<@&${roleId}>` : `**${category}**`;
       const embed = new EmbedBuilder()
         .setColor(0xED4245)
@@ -115,7 +114,7 @@ module.exports = {
     }
 
     const user = getUser(interaction.user.id);
-    const catKey = category.replace('+', 'plus');
+    const catKey = category;
     const cooldown = parseInt(getConfig(`cooldown_${catKey}`, getConfig('gen_cooldown', '0')));
     const now = Math.floor(Date.now() / 1000);
     const lastGen = user[`last_gen_${catKey}`] || 0;

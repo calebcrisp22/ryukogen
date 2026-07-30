@@ -1,7 +1,7 @@
 {
-  "name": "generator-bot",
+  "name": "fort-gen",
   "version": "1.0.0",
-  "description": "Discord account generator bot with stock management, drops, subscriptions, and invite tracking",
+  "description": "Discord Fortnite account generator bot with stock management, drops, subscriptions, and invite tracking",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

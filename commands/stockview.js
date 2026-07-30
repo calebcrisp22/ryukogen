@@ -11,9 +11,8 @@ module.exports = {
     await interaction.deferReply({ ephemeral: true });
 
     const free    = stockCount('free');
-    const freeplus = stockCount('free+');
     const premium = stockCount('premium');
-    const total   = free + freeplus + premium;
+    const total   = free + premium;
 
     const bar = (count) => {
       if (count === 0) return '🔴 Out of Stock';
@@ -27,7 +26,6 @@ module.exports = {
       .setDescription(`**${total}** total accounts available`)
       .addFields(
         { name: '🟢 Free',    value: `${bar(free)}\n${free} accounts`,     inline: true },
-        { name: '🔵 Free+',   value: `${bar(freeplus)}\n${freeplus} accounts`, inline: true },
         { name: '⭐ Premium', value: `${bar(premium)}\n${premium} accounts`, inline: true }
       )
       .setFooter({ text: 'Generator • Use /generate to claim an account' })

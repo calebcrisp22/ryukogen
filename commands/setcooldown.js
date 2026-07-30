@@ -5,7 +5,6 @@ const { ownerOnly } = require('../utils');
 const CATS = [
   { name: 'All Categories', value: 'all' },
   { name: '🟢 Free',        value: 'free' },
-  { name: '🔵 Free+',       value: 'free+' },
   { name: '⭐ Premium',     value: 'premium' },
 ];
 
@@ -37,10 +36,9 @@ module.exports = {
     if (category === 'all') {
       setConfig('gen_cooldown', String(seconds));
       setConfig('cooldown_free', String(seconds));
-      setConfig('cooldown_freeplus', String(seconds));
       setConfig('cooldown_premium', String(seconds));
     } else {
-      setConfig(`cooldown_${category.replace('+', 'plus')}`, String(seconds));
+      setConfig(`cooldown_${category}`, String(seconds));
     }
 
     const pretty = seconds === 0 ? 'No cooldown' : `${seconds}s (${(seconds / 60).toFixed(1)} min)`;

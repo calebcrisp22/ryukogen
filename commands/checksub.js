@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getUser } = require('../database');
 
-const tierColors = { none: 0x99AAB5, basic: 0x57F287, plus: 0x5865F2, premium: 0xFEE75C };
-const tierEmojis = { none: '⬜', basic: '🟢', plus: '🔵', premium: '⭐' };
+const tierColors = { none: 0x99AAB5, free: 0x57F287, premium: 0xFF6B00 };
+const tierEmojis = { none: '⬜', free: '🟢', premium: '⭐' };
 
 module.exports = {
   data: new SlashCommandBuilder()

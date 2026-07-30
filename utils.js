@@ -1,8 +1,8 @@
 const { EmbedBuilder } = require('discord.js');
 const { getConfig, getUser } = require('./database');
 
-const CATEGORIES = ['free', 'free+', 'premium'];
-const TIER_RANK = { none: 0, free: 1, 'free+': 2, premium: 3 };
+const CATEGORIES = ['free', 'premium'];
+const TIER_RANK = { none: 0, free: 1, premium: 2 };
 
 function isOwner(userId) {
   return userId === process.env.OWNER_ID;
@@ -22,7 +22,7 @@ function ownerOnly(interaction) {
 }
 
 function getCategoryRoleId(category) {
-  return getConfig(`role_${category.replace('+', 'plus')}`, null);
+  return getConfig(`role_${category}`, null);
 }
 
 function hasActiveSub(userId, category) {
@@ -37,7 +37,7 @@ function hasGenerateAccess(member, category) {
   if (isOwner(member.id)) return true;
 
   const roleId = getCategoryRoleId(category);
-  const roleName = category === 'free+' ? 'free+' : category;
+  const roleName = category;
   const hasRole = roleId
     ? member.roles.cache.has(roleId)
     : member.roles.cache.some(r => r.name.toLowerCase() === roleName.toLowerCase());
@@ -47,13 +47,8 @@ function hasGenerateAccess(member, category) {
     return hasRole;
   }
 
-  if (category === 'premium') {
-    // Premium tier: BOTH the premium role AND an active subscription are required
-    return hasRole && hasActiveSub(member.id, category);
-  }
-
-  // free+ (and any future mid-tiers): role OR active subscription
-  return hasRole || hasActiveSub(member.id, category);
+  // Premium tier: BOTH the premium role AND an active subscription are required
+  return hasRole && hasActiveSub(member.id, category);
 }
 
-module.exports = { CATEGORIES, isOwner, ownerOnly, getCategoryRoleId, hasGenerateAccess, hasActiveSub };
+module.exports = { CATEGORIES, TIER_RANK, isOwner, ownerOnly, getCategoryRoleId, hasGenerateAccess, hasActiveSub };

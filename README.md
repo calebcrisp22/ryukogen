@@ -1,16 +1,16 @@
-# Generator Bot
+# Fortnite Generator Bot
 
-A Discord account generator bot with stock management, auto-drops, subscriptions, invite tracking, and vouches.
+A Discord Fortnite account generator bot with stock management, auto-drops, subscriptions, invite tracking, and vouches.
 
 ## Features
 
-- 🎮 **Generate** accounts from stock via `/generate`
+- 🎮 **Generate** Fortnite accounts from stock via `/generate`
 - 📦 **Stock management** — upload `.txt` files to add accounts per category
 - 🎁 **Auto-drop system** — automatically drops accounts in a channel on a timer
 - 🪙 **Token system** — give users tokens
 - 📨 **Invite tracking** — track who invited who, leaderboard
 - ⭐ **Vouch system** — users can leave star-rated vouches
-- 💳 **Subscriptions** — assign tiers (Basic, Plus, Premium) to users
+- 💳 **Subscriptions** — assign tiers (Free, Premium) to users
 - 📊 **Beautiful embeds** — channel embed + DM with credentials on generate
 
 ## Setup
@@ -125,8 +125,8 @@ You can use any format — whatever you paste in the txt file is what gets sent 
 | `/refreshinvites` | Refresh invite cache |
 | `/resetjoins <user>` | Reset join count for a user |
 | `/viewjoins <user>` | View who joined via an inviter |
-| `/resetplustime <user>` | Reset plus time for a user |
-| `/resetallplustime` | Reset plus time for all users |
+| `/resetplustime <user>` | Reset premium time for a user |
+| `/resetallplustime` | Reset premium time for all users |
 
 ### ⭐ Vouches
 | Command | Description |
