@@ -4,7 +4,7 @@ const { ownerOnly, CATEGORIES } = require('../utils');
 const https = require('https');
 const http = require('http');
 
-const CAT_LABELS = { free: '🟢 Free', 'free+': '🔵 Free+', premium: '⭐ Premium' };
+const CAT_LABELS = { free: '🟢 Free', premium: '⭐ Premium' };
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,7 +16,6 @@ module.exports = {
         .setRequired(true)
         .addChoices(
           { name: 'Free', value: 'free' },
-          { name: 'Free+', value: 'free+' },
           { name: 'Premium', value: 'premium' }
         )
     )
@@ -45,7 +44,7 @@ module.exports = {
       const added = addStockBulk(category, lines, 'stock');
       const total = stockCount(category);
       const categoryLabel = CAT_LABELS[category] || category;
-      const stockSummary = ['free', 'free+', 'premium']
+      const stockSummary = ['free', 'premium']
         .map(c => `${CAT_LABELS[c]} **${stockCount(c)}**`)
         .join('   •   ');
 

@@ -12,7 +12,6 @@ module.exports = {
         .setRequired(false)
         .addChoices(
           { name: 'Free', value: 'free' },
-          { name: 'Free+', value: 'free+' },
           { name: 'Premium', value: 'premium' }
         )
     ),

@@ -12,7 +12,6 @@ module.exports = {
         .setRequired(true)
         .addChoices(
           { name: 'Free', value: 'free' },
-          { name: 'Free+', value: 'free+' },
           { name: 'Premium', value: 'premium' }
         )
     )
@@ -33,7 +32,6 @@ module.exports = {
     setConfig(key, role.id);
 
     const freeRole    = getConfig('role_free');
-    const freeplusRole = getConfig('role_freeplus');
     const premiumRole = getConfig('role_premium');
 
     const embed = new EmbedBuilder()
@@ -42,7 +40,6 @@ module.exports = {
       .setDescription(`**${category}** is now gated to <@&${role.id}>.`)
       .addFields(
         { name: '🟢 Free', value: freeRole ? `<@&${freeRole}>` : 'By role name "freegen"', inline: true },
-        { name: '🔵 Free+', value: freeplusRole ? `<@&${freeplusRole}>` : 'By role name "free+"', inline: true },
         { name: '⭐ Premium', value: premiumRole ? `<@&${premiumRole}>` : 'By role name "premium"', inline: true }
       )
       .setFooter({ text: 'Generator' })

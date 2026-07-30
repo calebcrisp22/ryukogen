@@ -80,7 +80,7 @@ function applyPresence(client) {
 }
 client.applyPresence = applyPresence;
 
-const SUB_ROLE_KEYS = { free: 'role_free', 'free+': 'role_freeplus', premium: 'role_premium' };
+const SUB_ROLE_KEYS = { free: 'role_free', premium: 'role_premium' };
 
 async function sweepExpiredSubs(client) {
   const now = Math.floor(Date.now() / 1000);
