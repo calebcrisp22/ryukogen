@@ -154,10 +154,10 @@ client.on('interactionCreate', async (interaction) => {
         .setColor(0x5865F2)
         .setTitle('❓ How to Link Your Account')
         .setDescription([
-          '**1.** Open the platform login page (Ubisoft Connect / console store).',
+          '**1.** Open the Epic Games login page (epicgames.com/login) or the Fortnite launcher.',
           '**2.** Sign in with the **email** and **password** above.',
           '**3.** Complete any 2FA prompts — check the account notes for 2FA status.',
-          '**4.** Tap **Copy Skin Link** to preview the account inventory.',
+          '**4.** Tap **Copy Skin Link** to preview the account\'s skins, V-Bucks, and cosmetics.',
           '',
           '⚠️ Only change the password if the account notes confirm it is safe.'
         ].join('\n'))

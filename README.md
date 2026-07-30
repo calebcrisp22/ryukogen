@@ -10,7 +10,7 @@ A Discord Fortnite account generator bot with stock management, auto-drops, subs
 - 🪙 **Token system** — give users tokens
 - 📨 **Invite tracking** — track who invited who, leaderboard
 - ⭐ **Vouch system** — users can leave star-rated vouches
-- 💳 **Subscriptions** — assign tiers (Basic, Plus, Premium) to users
+- 💳 **Subscriptions** — assign tiers (Free, Premium) to users
 - 📊 **Beautiful embeds** — channel embed + DM with credentials on generate
 
 ## Setup
